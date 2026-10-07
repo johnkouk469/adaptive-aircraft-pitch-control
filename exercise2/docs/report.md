@@ -21,7 +21,15 @@ y_p = \begin{bmatrix}
 \end{aligned}
 $$
 
-with $A_p = \begin{bmatrix} \frac{Z_a}{V} & 1 + \frac{Z_q}{V} \\ M_a & M_q \end{bmatrix}  = \begin{bmatrix} -0.8060 & 1 \\ -9.1486 & -4.59 \end{bmatrix}$, $B_p = \begin{bmatrix} -0.04 \\ -4.59 \end{bmatrix}$ and $C_p = \begin{bmatrix} 1 & 0 \end{bmatrix}$.
+with
+
+$$
+\begin{aligned}
+A_p &= \begin{bmatrix} \frac{Z_a}{V} & 1 + \frac{Z_q}{V} \\ M_a & M_q \end{bmatrix} = \begin{bmatrix} -0.8060 & 1 \\ -9.1486 & -4.59 \end{bmatrix}, \\
+B_p &= \begin{bmatrix} -0.04 \\ -4.59 \end{bmatrix}, \\
+C_p &= \begin{bmatrix} 1 & 0 \end{bmatrix}.
+\end{aligned}
+$$
 
 The output $y_p$ is the angle of attack. The brief gives the reference input $r(t)$ in degrees; the simulation converts it to rad, and the plots show angles in degrees. To give the controller proportional-integral characteristics, we define $e_y = y_p - r$ (where $r$ is the reference input given in the brief), which we integrate by forming the system
 
@@ -69,7 +77,13 @@ Q_{LQR} = \begin{bmatrix}
 \end{bmatrix} , R_{LQR} = 0.1
 $$
 
-With the resulting gain matrix $K_{LQR} = \begin{bmatrix} 14.142135623730947 & 4.398642429826708 & 0.696409743098341 \end{bmatrix}^T$ we arrive at the desired closed-loop reference model
+With the resulting gain matrix
+
+$$
+K_{LQR} = \begin{bmatrix} 14.142135623730947 & 4.398642429826708 & 0.696409743098341 \end{bmatrix}^T
+$$
+
+we arrive at the desired closed-loop reference model
 
 $$
 \begin{aligned}
@@ -78,14 +92,18 @@ y_m = C_m x_m
 \end{aligned}
 $$
 
-with $B_m = \begin{bmatrix} -1 \\ 0 \\ 0 \end{bmatrix} , \ C_m = \begin{bmatrix} 0 & 1 & 0 \end{bmatrix}$ and
+with
 
 $$
-A_m = \begin{bmatrix}
+\begin{aligned}
+B_m &= \begin{bmatrix} -1 \\ 0 \\ 0 \end{bmatrix}, \\
+C_m &= \begin{bmatrix} 0 & 1 & 0 \end{bmatrix}, \\
+A_m &= \begin{bmatrix}
 0 & 1 & 0 \\
 -0.565685424949238 & -0.981945697193068 & 0.972143610276066 \\
 -64.912402512925040 & -29.338368752904593 & -7.786520720821383
 \end{bmatrix}
+\end{aligned}
 $$
 
 through the relation $A_m = \left( A + B K_{LQR}^T \right)$.
@@ -136,7 +154,17 @@ $$
 \end{aligned}
 $$
 
-After some trials, the design parameters took the values ${\Gamma}_k = (180/\pi)^2 \begin{bmatrix} 2000 & 0 & 0 \\ 0 & 2000 & 0 \\ 0 & 0 & 200 \end{bmatrix} , \ {\Gamma}_\theta = (180/\pi)^2 \begin{bmatrix} 2000 & 0 & 0 \\ 0 & 2000 & 0 \\ 0 & 0 & 200 \end{bmatrix}$ and $Q = \begin{bmatrix} 100 & 0 & 0 \\ 0 & 100 & 0 \\ 0 & 0 & 100 \end{bmatrix}$ (the matrix $P$ is set indirectly by $Q$ through the Lyapunov equation $P A_m + A_m^T P = -Q$). The matrices were tuned with all signals in degrees. The model states are in rad, and the update laws are quadratic in the signals ($x e^T$), so the same behaviour needs the gains multiplied by $(180/\pi)^2 \approx 3283$.
+After some trials, the design parameters took the values
+
+$$
+\begin{aligned}
+{\Gamma}_k &= (180/\pi)^2 \begin{bmatrix} 2000 & 0 & 0 \\ 0 & 2000 & 0 \\ 0 & 0 & 200 \end{bmatrix}, \\
+{\Gamma}_\theta &= (180/\pi)^2 \begin{bmatrix} 2000 & 0 & 0 \\ 0 & 2000 & 0 \\ 0 & 0 & 200 \end{bmatrix}, \\
+Q &= \begin{bmatrix} 100 & 0 & 0 \\ 0 & 100 & 0 \\ 0 & 0 & 100 \end{bmatrix}
+\end{aligned}
+$$
+
+(the matrix $P$ is set indirectly by $Q$ through the Lyapunov equation $P A_m + A_m^T P = -Q$). The matrices were tuned with all signals in degrees. The model states are in rad, and the update laws are quadratic in the signals ($x e^T$), so the same behaviour needs the gains multiplied by $(180/\pi)^2 \approx 3283$.
 
 ![Top: reference input r, closed-loop output y and reference model output ym in degrees over 100 s with the adaptive controller. Bottom: control signal delta_e in degrees.](figures/c-tracking.png)
 

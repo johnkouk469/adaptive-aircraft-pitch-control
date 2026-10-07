@@ -9,7 +9,9 @@ The vertical motion of conventional aircraft is controlled by the engine power a
 The figure above shows the various quantities. Taking as state variables $x_p = [\alpha, q]^T$, in rad and rad/s respectively, and for a constant aircraft speed measured in ft/s, the dynamic equations that describe the vertical motion for relatively small elevator deflections in rad are:
 
 $$
-\dot{x}_p = \underbrace{\begin{bmatrix} -0.8060 & 1 \\ -9.1486 & -4.59 \end{bmatrix}}_{A_p} x_p + \underbrace{\begin{bmatrix} -0.04 \\ -4.59 \end{bmatrix}}_{B_p} \delta_e. \tag{1}
+\begin{aligned}
+\dot{x}_p = \underbrace{\begin{bmatrix} -0.8060 & 1 \\ -9.1486 & -4.59 \end{bmatrix}}_{A_p} x_p + \underbrace{\begin{bmatrix} -0.04 \\ -4.59 \end{bmatrix}}_{B_p} \delta_e.
+\end{aligned} \tag{1}
 $$
 
 The output $y$ is the angle of attack. To give the controller proportional-integral characteristics, we define $e_y \triangleq y_p - r$, which we integrate by forming the system
@@ -23,6 +25,7 @@ $e_{y_I}$, together with the state variables, is used to form the feedback.
 (a) Implement in MATLAB a linear state-feedback controller with proportional-integral characteristics, such that all signals in the closed loop are bounded and the error $e \triangleq y_p - y_m$ converges to zero. Here $y_m$ is the output of the reference model described in the statement of Assignment 1, and the reference input $r(t)$ is:
 
 $$
+\begin{aligned}
 r(t) = \begin{cases}
 0^\circ & 0 \leq t < 1s \\
 0.5^\circ & 1 \leq t < 10s \\
@@ -35,7 +38,8 @@ r(t) = \begin{cases}
 0^\circ & 75 \leq t < 85s \\
 0.5^\circ & 85 \leq t < 95s \\
 0^\circ & 95 \leq t
-\end{cases} \tag{2}
+\end{cases}
+\end{aligned} \tag{2}
 $$
 
 In the same plot, show the output, the output of the model and the reference input. In a second plot, show the control signal that achieves this result.
@@ -43,7 +47,9 @@ In the same plot, show the output, the output of the model and the reference inp
 (b) Next, assume that the system (1) also contains uncertainties and is described by the state equations
 
 $$
-\dot{x}_p = A_p x_p + B_p D(\delta_e + f(x_p)), \tag{3}
+\begin{aligned}
+\dot{x}_p = A_p x_p + B_p D(\delta_e + f(x_p)),
+\end{aligned} \tag{3}
 $$
 
 with

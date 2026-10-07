@@ -5,13 +5,17 @@
 Consider the system:
 
 $$
-\dot{x}_p = A_p x_p + B_p D (u + f(x_p)) \tag{1}
+\begin{aligned}
+\dot{x}_p = A_p x_p + B_p D (u + f(x_p))
+\end{aligned} \tag{1}
 $$
 
 where $x_p \in \mathbb{R}^{n_p}$ is the state vector of the system and $u \in \mathbb{R}$ the control input. The function $f(*)$ has an unknown form, but we know that it is locally Lipschitz continuous in $x_p$ and, moreover,
 
 $$
-f(x_p) = \theta^T \Phi(x_p) \in \mathbb{R}. \tag{2}
+\begin{aligned}
+f(x_p) = \theta^T \Phi(x_p) \in \mathbb{R}.
+\end{aligned} \tag{2}
 $$
 
 In (2), $\theta \in \mathbb{R}^{N \times 1}$ denotes a vector of unknown but constant parameters and $\Phi(x_p) \in \mathbb{R}^N$ a vector of known nonlinear functions, locally Lipschitz continuous in $x_p$.
