@@ -1,0 +1,15 @@
+# MATLAB / Octave
+*.asv
+*.autosave
+*~
+*.mex*
+*.mat
+octave-workspace
+octave-core
+core
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
